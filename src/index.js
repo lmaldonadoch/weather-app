@@ -1,15 +1,10 @@
 import './style.scss';
 import 'bootstrap';
+import City from './city';
 
-function component() {
-  const element = document.createElement('div');
+const searchButton = document.getElementById('search-button');
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = 'Hello';
-
-  element.classList.add('test');
-
-  return element;
-}
-
-document.body.appendChild(component());
+const form = document.getElementById('form');
+searchButton.onclick = () => {
+  City.getCity(form[0].value);
+};
