@@ -1,5 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
 
-.test {
-  color: red;
+.city {
+  min-height: 90vh;
+  height: 90vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
