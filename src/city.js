@@ -41,7 +41,9 @@ const City = (() => {
   function cityObject(index, city = null) {
     let cityInfo = {};
     if (city === null) {
+      console.log(getCity(displayingCapitals[index]));
       getCity(displayingCapitals[index]).then((response) => {
+        console.log('response');
         cityInfo.tempF = response[0].main;
         cityInfo.tempC = response[1].main;
         cityInfo.weather = response[0].weather[0].main;
@@ -81,8 +83,6 @@ const City = (() => {
       }
     }
 
-    console.log('here');
-
     displayingCapitals.forEach((capital, index) => {
       let city = array[index];
       getImage(capital).then((response) => {
@@ -91,7 +91,13 @@ const City = (() => {
     });
   }
 
-  return { getCity, getImage, displayRandomCity, cityObject };
+  return {
+    getCity,
+    getImage,
+    displayRandomCity,
+    cityObject,
+    displayingCapitals,
+  };
 })();
 
 export default City;

@@ -1,23 +1,20 @@
 import './style.scss';
 import 'bootstrap';
 import City from './city';
+import Dom from './dom';
 
-const searchButton = document.getElementById('search-button');
+Dom.addButtonFunctionality;
 
-const form = document.getElementById('form');
-searchButton.onclick = () => {
-  City.getCity(form[0].value);
-};
+City.displayRandomCity(Dom.randomCities);
 
-const randomCities = document.getElementsByClassName('city');
+City.displayingCapitals.forEach((city, index) => {
+  City.getCity(city).then((response) => {
+    let cityInfo = {};
+    cityInfo.tempF = response[0].main;
+    cityInfo.tempC = response[1].main;
+    cityInfo.weather = response[0].weather[0].main;
+    cityInfo.name = response[0].name;
 
-City.displayRandomCity([...randomCities]);
-
-[...randomCities].forEach((city, index) => {
-  let cityInfo = City.cityObject(index, null, 'C');
-  let infoDiv = document.createElement('div');
-  infoDiv.classList.add('d-flex', 'flex-column', 'info');
-
-  let cityNameDiv = document.createElement('div');
-  cityNameDiv.classList.add('title');
+    Dom.createWeatherInfo(cityInfo, index);
+  });
 });
