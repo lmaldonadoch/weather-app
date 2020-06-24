@@ -3,7 +3,20 @@ import 'bootstrap';
 import City from './city';
 import Dom from './dom';
 
-Dom.addButtonFunctionality;
+const searchedCity = JSON.parse(localStorage.getItem('city'));
+
+if (searchedCity) {
+  let cityInfo = {};
+  cityInfo.tempF = searchedCity[0].main;
+  cityInfo.tempC = searchedCity[1].main;
+  cityInfo.weather = searchedCity[0].weather[0].main;
+  cityInfo.weatherIcon = `http://openweathermap.org/img/wn/${searchedCity[0].weather[0].icon}@2x.png`;
+  cityInfo.name = searchedCity[0].name;
+
+  City.getImage(cityInfo.name).then((response) => {
+    Dom.cityToDisplay(cityInfo, response.url);
+  });
+}
 
 City.displayRandomCity(Dom.randomCities);
 
@@ -13,8 +26,11 @@ City.displayingCapitals.forEach((city, index) => {
     cityInfo.tempF = response[0].main;
     cityInfo.tempC = response[1].main;
     cityInfo.weather = response[0].weather[0].main;
+    cityInfo.weatherIcon = `http://openweathermap.org/img/wn/${response[0].weather[0].icon}@2x.png`;
     cityInfo.name = response[0].name;
 
     Dom.createWeatherInfo(cityInfo, index);
   });
 });
+
+Dom.addButtonFunctionality();

@@ -1,10 +1,44 @@
 import City from './city';
 
 const Dom = (() => {
+  function changeActive(button) {
+    [...document.getElementsByClassName('nav-link')].forEach((link) => {
+      link.classList.remove('active');
+    });
+
+    button.classList.add('active');
+  }
+
+  function switchHidden(div) {
+    [...document.getElementsByClassName('temp-container')].forEach(
+      (container) => {
+        if (container.id === div) {
+          container.classList.remove('hidden');
+        } else {
+          container.classList.add('hidden');
+        }
+      }
+    );
+  }
+
   function addButtonFunctionality() {
     const searchButton = document.getElementById('search-button');
     searchButton.onclick = () => {
-      City.getCity(form[0].value);
+      City.getCity(form[0].value).then((response) => {
+        City.saveCity(response);
+      });
+    };
+
+    const celsiusButton = document.getElementById('celsius-select');
+    celsiusButton.onclick = () => {
+      changeActive(celsiusButton);
+      switchHidden('celsius');
+    };
+
+    const fahrenheitButton = document.getElementById('fahrenheit-select');
+    fahrenheitButton.onclick = () => {
+      changeActive(fahrenheitButton);
+      switchHidden('fahrenheit');
     };
   }
 
@@ -18,15 +52,22 @@ const Dom = (() => {
       'flex-column',
       'info',
       'temp-wrapper',
-      'position-relative'
+      'position-relative',
+      'weather-info-container'
     );
 
     let cityNameDiv = document.createElement('div');
     cityNameDiv.classList.add('title');
-    cityNameDiv.innerHTML = cityInfo.name;
+    cityNameDiv.innerHTML = `${cityInfo.name} <img src = '${cityInfo.weatherIcon}' alt="">`;
 
     infoDiv.appendChild(cityNameDiv);
 
+    createInfoCards(infoDiv, cityInfo);
+
+    cityDiv.appendChild(infoDiv);
+  }
+
+  function createInfoCards(parentDiv, cityInfo) {
     // Fahrenheit temp container
 
     let fahrenheitContainer = document.createElement('div');
@@ -35,26 +76,36 @@ const Dom = (() => {
       'w-100',
       'h-100',
       'd-flex',
-      'flex-column'
+      'flex-column',
+      'hidden',
+      'temp-container',
+      'fahrenheit'
     );
+    fahrenheitContainer.setAttribute('id', 'fahrenheit');
 
     let fahrenheitTemp = document.createElement('div');
     fahrenheitTemp.classList.add('fahrenheit-temp');
-    fahrenheitTemp.innerHTML = cityInfo.tempF.temp;
+    fahrenheitTemp.innerHTML = `${Math.floor(cityInfo.tempF.temp)} °F`;
 
     let minMaxDivF = document.createElement('div');
+    minMaxDivF.classList.add(
+      'd-flex',
+      'flex-column',
+      'justify-content-between',
+      'minmax-temp'
+    );
 
     let minTempF = document.createElement('div');
-    minTempF.innerHTML = cityInfo.tempF.temp_min;
+    minTempF.innerHTML = `min: ${Math.floor(cityInfo.tempF.temp_min)} °F`;
 
     let maxTempF = document.createElement('div');
-    maxTempF.innerHTML = cityInfo.tempF.temp_max;
+    maxTempF.innerHTML = `max: ${Math.floor(cityInfo.tempF.temp_max)} °F`;
 
     minMaxDivF.append(minTempF, maxTempF);
 
     fahrenheitContainer.append(fahrenheitTemp, minMaxDivF);
 
-    infoDiv.append(fahrenheitContainer);
+    parentDiv.append(fahrenheitContainer);
 
     // Celsius temp container
 
@@ -64,31 +115,69 @@ const Dom = (() => {
       'w-100',
       'h-100',
       'd-flex',
-      'flex-column'
+      'flex-column',
+      'temp-container',
+      'celsius'
     );
+    celsiusContainer.setAttribute('id', 'celsius');
 
     let celsiusTemp = document.createElement('div');
     celsiusTemp.classList.add('celsius-temp');
-    celsiusTemp.innerHTML = cityInfo.tempF.temp;
+    celsiusTemp.innerHTML = `${Math.floor(cityInfo.tempC.temp)} °C`;
 
     let minMaxDivC = document.createElement('div');
+    minMaxDivC.classList.add(
+      'd-flex',
+      'flex-column',
+      'justify-content-between',
+      'minmax-temp'
+    );
 
     let minTempC = document.createElement('div');
-    minTempC.innerHTML = cityInfo.tempC.temp_min;
+    minTempC.innerHTML = `min: ${Math.floor(cityInfo.tempC.temp_min)} °C`;
 
     let maxTempC = document.createElement('div');
-    maxTempC.innerHTML = cityInfo.tempC.temp_max;
+    maxTempC.innerHTML = `max: ${Math.floor(cityInfo.tempC.temp_max)} °C`;
 
     minMaxDivC.append(minTempC, maxTempC);
 
     celsiusContainer.append(celsiusTemp, minMaxDivC);
 
-    infoDiv.append(celsiusContainer);
+    parentDiv.append(celsiusContainer);
+  }
+
+  function cityToDisplay(cityInfo, background) {
+    const cityDiv = document.getElementById('main-city');
+    cityDiv.style.backgroundImage = `url(${background})`;
+    console.log(background);
+    console.log(cityDiv.style);
+    let infoDiv = document.createElement('div');
+    infoDiv.classList.add(
+      'd-flex',
+      'flex-column',
+      'info',
+      'temp-wrapper',
+      'position-relative',
+      'weather-info-container'
+    );
+
+    let cityNameDiv = document.createElement('div');
+    cityNameDiv.classList.add('title');
+    cityNameDiv.innerHTML = `${cityInfo.name} <img src = '${cityInfo.weatherIcon}' alt="">`;
+
+    infoDiv.appendChild(cityNameDiv);
+
+    createInfoCards(infoDiv, cityInfo);
 
     cityDiv.appendChild(infoDiv);
   }
 
-  return { addButtonFunctionality, randomCities, createWeatherInfo };
+  return {
+    addButtonFunctionality,
+    randomCities,
+    createWeatherInfo,
+    cityToDisplay,
+  };
 })();
 
 export default Dom;

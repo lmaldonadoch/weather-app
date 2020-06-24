@@ -41,12 +41,11 @@ const City = (() => {
   function cityObject(index, city = null) {
     let cityInfo = {};
     if (city === null) {
-      console.log(getCity(displayingCapitals[index]));
       getCity(displayingCapitals[index]).then((response) => {
-        console.log('response');
         cityInfo.tempF = response[0].main;
         cityInfo.tempC = response[1].main;
         cityInfo.weather = response[0].weather[0].main;
+        cityInfo.weatherIcon = `http://openweathermap.org/img/wn/${response[0].weather[0].icon}@2x.png`;
         cityInfo.name = response[0].name;
       });
     } else {
@@ -54,11 +53,10 @@ const City = (() => {
         cityInfo.tempF = response[0].main;
         cityInfo.tempC = response[1].main;
         cityInfo.weather = response[0].weather[0].main;
+        cityInfo.weatherIcon = `http://openweathermap.org/img/wn/${response[0].weather[0].icon}@2x.png`;
         cityInfo.name = response[0].name;
       });
     }
-
-    console.log(cityInfo);
     return cityInfo;
   }
 
@@ -91,12 +89,17 @@ const City = (() => {
     });
   }
 
+  function saveCity(city) {
+    localStorage.setItem('city', JSON.stringify(city));
+  }
+
   return {
     getCity,
     getImage,
     displayRandomCity,
     cityObject,
     displayingCapitals,
+    saveCity,
   };
 })();
 

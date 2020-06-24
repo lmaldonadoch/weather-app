@@ -10,10 +10,10 @@
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link active" href="#">°C</a>
+          <a class="nav-link active" href="#" id="celsius-select">°C</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">°F</a>
+          <a class="nav-link" href="#" id="fahrenheit-select">°F</a>
         </li>
         <li class="nav-item">
           <form action="" class="form-inline" id="form">
@@ -34,14 +34,29 @@
         </li>
       </ul>
     </nav>
-    <h1 class="page-title">My weather App</h1>
-    <div class="container-fluid row search no-gutters"></div>
+    <h1 class="page-title text-center my-3">The Weather Guru</h1>
+    <div
+      class="container-fluid row search no-gutters px-0 main-city"
+      id="main-city"
+    ></div>
 
     <div class="container-fluid row capitals no-gutters px-0">
-      <div class="col-12 col-lg-3 city" id="city-0"></div>
-      <div class="col-12 col-lg-3 city" id="city-1"></div>
-      <div class="col-12 col-lg-3 city" id="city-2"></div>
-      <div class="col-12 col-lg-3 city" id="city-3"></div>
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-0"
+      ></div>
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-1"
+      ></div>
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-2"
+      ></div>
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-3"
+      ></div>
     </div>
   </body>
   <script src="./bundle.js"></script>
