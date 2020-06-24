@@ -5,7 +5,11 @@ import Dom from './dom';
 
 const searchedCity = JSON.parse(localStorage.getItem('city'));
 if (searchedCity) {
-  if (searchedCity instanceof String || searchedCity[0].cod === '404') {
+  if (
+    searchedCity instanceof String
+    || searchedCity[0].cod === '404'
+    || typeof searchedCity === 'string'
+  ) {
     Dom.errorMessage();
   } else {
     const cityInfo = {};
