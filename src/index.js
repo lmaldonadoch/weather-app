@@ -4,12 +4,11 @@ import City from './city';
 import Dom from './dom';
 
 const searchedCity = JSON.parse(localStorage.getItem('city'));
-console.log(searchedCity);
 if (searchedCity) {
   if (searchedCity[0].cod === '404') {
     Dom.errorMessage();
   } else {
-    let cityInfo = {};
+    const cityInfo = {};
     cityInfo.tempF = searchedCity[0].main;
     cityInfo.tempC = searchedCity[1].main;
     cityInfo.weather = searchedCity[0].weather[0].main;
@@ -29,7 +28,7 @@ City.displayingCapitals.forEach((city, index) => {
     if (response === 'error') {
       Dom.errorMessage(index);
     } else {
-      let cityInfo = {};
+      const cityInfo = {};
       cityInfo.tempF = response[0].main;
       cityInfo.tempC = response[1].main;
       cityInfo.weather = response[0].weather[0].main;

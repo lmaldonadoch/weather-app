@@ -17,12 +17,13 @@ const Dom = (() => {
         } else {
           container.classList.add('hidden');
         }
-      }
+      },
     );
   }
 
   function addButtonFunctionality() {
     const searchButton = document.getElementById('search-button');
+    const form = document.getElementById('form');
     searchButton.onclick = () => {
       City.getCity(form[0].value).then((response) => {
         City.saveCity(response);
@@ -44,33 +45,10 @@ const Dom = (() => {
 
   const randomCities = [...document.getElementsByClassName('city')];
 
-  function createWeatherInfo(cityInfo, index) {
-    let cityDiv = document.getElementById(`city-${index}`);
-    let infoDiv = document.createElement('div');
-    infoDiv.classList.add(
-      'd-flex',
-      'flex-column',
-      'info',
-      'temp-wrapper',
-      'position-relative',
-      'weather-info-container'
-    );
-
-    let cityNameDiv = document.createElement('div');
-    cityNameDiv.classList.add('title');
-    cityNameDiv.innerHTML = `${cityInfo.name} <img src = '${cityInfo.weatherIcon}' alt="">`;
-
-    infoDiv.appendChild(cityNameDiv);
-
-    createInfoCards(infoDiv, cityInfo);
-
-    cityDiv.appendChild(infoDiv);
-  }
-
   function createInfoCards(parentDiv, cityInfo) {
     // Fahrenheit temp container
 
-    let fahrenheitContainer = document.createElement('div');
+    const fahrenheitContainer = document.createElement('div');
     fahrenheitContainer.classList.add(
       'position-absolute',
       'w-100',
@@ -79,26 +57,26 @@ const Dom = (() => {
       'flex-column',
       'hidden',
       'temp-container',
-      'fahrenheit'
+      'fahrenheit',
     );
     fahrenheitContainer.setAttribute('id', 'fahrenheit');
 
-    let fahrenheitTemp = document.createElement('div');
+    const fahrenheitTemp = document.createElement('div');
     fahrenheitTemp.classList.add('fahrenheit-temp');
     fahrenheitTemp.innerHTML = `${Math.floor(cityInfo.tempF.temp)} °F`;
 
-    let minMaxDivF = document.createElement('div');
+    const minMaxDivF = document.createElement('div');
     minMaxDivF.classList.add(
       'd-flex',
       'flex-column',
       'justify-content-between',
-      'minmax-temp'
+      'minmax-temp',
     );
 
-    let minTempF = document.createElement('div');
+    const minTempF = document.createElement('div');
     minTempF.innerHTML = `min: ${Math.floor(cityInfo.tempF.temp_min)} °F`;
 
-    let maxTempF = document.createElement('div');
+    const maxTempF = document.createElement('div');
     maxTempF.innerHTML = `max: ${Math.floor(cityInfo.tempF.temp_max)} °F`;
 
     minMaxDivF.append(minTempF, maxTempF);
@@ -109,7 +87,7 @@ const Dom = (() => {
 
     // Celsius temp container
 
-    let celsiusContainer = document.createElement('div');
+    const celsiusContainer = document.createElement('div');
     celsiusContainer.classList.add(
       'position-absolute',
       'w-100',
@@ -117,26 +95,26 @@ const Dom = (() => {
       'd-flex',
       'flex-column',
       'temp-container',
-      'celsius'
+      'celsius',
     );
     celsiusContainer.setAttribute('id', 'celsius');
 
-    let celsiusTemp = document.createElement('div');
+    const celsiusTemp = document.createElement('div');
     celsiusTemp.classList.add('celsius-temp');
     celsiusTemp.innerHTML = `${Math.floor(cityInfo.tempC.temp)} °C`;
 
-    let minMaxDivC = document.createElement('div');
+    const minMaxDivC = document.createElement('div');
     minMaxDivC.classList.add(
       'd-flex',
       'flex-column',
       'justify-content-between',
-      'minmax-temp'
+      'minmax-temp',
     );
 
-    let minTempC = document.createElement('div');
+    const minTempC = document.createElement('div');
     minTempC.innerHTML = `min: ${Math.floor(cityInfo.tempC.temp_min)} °C`;
 
-    let maxTempC = document.createElement('div');
+    const maxTempC = document.createElement('div');
     maxTempC.innerHTML = `max: ${Math.floor(cityInfo.tempC.temp_max)} °C`;
 
     minMaxDivC.append(minTempC, maxTempC);
@@ -146,21 +124,44 @@ const Dom = (() => {
     parentDiv.append(celsiusContainer);
   }
 
-  function cityToDisplay(cityInfo, background) {
-    const cityDiv = document.getElementById('main-city');
-    cityDiv.style.backgroundImage = `url(${background})`;
-    cityDiv.classList.add('city');
-    let infoDiv = document.createElement('div');
+  function createWeatherInfo(cityInfo, index) {
+    const cityDiv = document.getElementById(`city-${index}`);
+    const infoDiv = document.createElement('div');
     infoDiv.classList.add(
       'd-flex',
       'flex-column',
       'info',
       'temp-wrapper',
       'position-relative',
-      'weather-info-container'
+      'weather-info-container',
     );
 
-    let cityNameDiv = document.createElement('div');
+    const cityNameDiv = document.createElement('div');
+    cityNameDiv.classList.add('title');
+    cityNameDiv.innerHTML = `${cityInfo.name} <img src = '${cityInfo.weatherIcon}' alt="">`;
+
+    infoDiv.appendChild(cityNameDiv);
+
+    createInfoCards(infoDiv, cityInfo);
+
+    cityDiv.appendChild(infoDiv);
+  }
+
+  function cityToDisplay(cityInfo, background) {
+    const cityDiv = document.getElementById('main-city');
+    cityDiv.style.backgroundImage = `url(${background})`;
+    cityDiv.classList.add('city');
+    const infoDiv = document.createElement('div');
+    infoDiv.classList.add(
+      'd-flex',
+      'flex-column',
+      'info',
+      'temp-wrapper',
+      'position-relative',
+      'weather-info-container',
+    );
+
+    const cityNameDiv = document.createElement('div');
     cityNameDiv.classList.add('title');
     cityNameDiv.innerHTML = `${cityInfo.name} <img src = '${cityInfo.weatherIcon}' alt="">`;
 
@@ -172,14 +173,13 @@ const Dom = (() => {
   }
 
   function errorMessage() {
-    let cityDiv = document.getElementById('main-city');
-    cityDiv.innerHTML =
-      'I am sorry but I could not find the city you are looking for. Please check your spelling';
+    const cityDiv = document.getElementById('main-city');
+    cityDiv.innerHTML = 'I am sorry but I could not find the city you are looking for. Please check your spelling';
     cityDiv.classList.add(
       'error-message',
       'bg-danger',
       'text-light',
-      'text-center'
+      'text-center',
     );
   }
 

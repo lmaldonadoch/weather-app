@@ -1,5 +1,3 @@
-import Dom from './dom';
-
 const City = (() => {
   const weatherKey = '4cc6db5c47a2fa3608fe302dad1dd2dc';
 
@@ -29,23 +27,23 @@ const City = (() => {
     try {
       const fahrenheit = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=imperial`,
-        { mode: 'cors' }
+        { mode: 'cors' },
       );
       const celsius = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=metric`,
-        { mode: 'cors' }
+        { mode: 'cors' },
       );
       const temperatureF = await fahrenheit.json();
       const temperatureC = await celsius.json();
 
       return [temperatureF, temperatureC];
     } catch (error) {
-      Dom.errorMessage(city);
+      return 'I am sorry but I could not find the city you are looking for. Please check your spelling';
     }
   }
 
   function cityObject(index, city = null) {
-    let cityInfo = {};
+    const cityInfo = {};
     if (city === null) {
       getCity(displayingCapitals[index]).then((response) => {
         cityInfo.tempF = response[0].main;
@@ -70,11 +68,11 @@ const City = (() => {
     try {
       const imageURLJSON = await fetch(
         `https://source.unsplash.com/1600x900/?${city}-city`,
-        { mode: 'cors' }
+        { mode: 'cors' },
       );
       return imageURLJSON;
     } catch (error) {
-      var rescueURL = {
+      const rescueURL = {
         url:
           'https://images.unsplash.com/photo-1474524955719-b9f87c50ce47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80',
       };
@@ -85,20 +83,18 @@ const City = (() => {
   function displayRandomCity(array) {
     let i = 4;
     while (i > 0) {
-      let random = Math.floor(Math.random() * 17);
-      if (displayingCapitals.includes(capitals[random])) {
-        continue;
-      } else {
+      const random = Math.floor(Math.random() * 17);
+      if (!displayingCapitals.includes(capitals[random])) {
         displayingCapitals.push(capitals[random]);
         i -= 1;
       }
     }
 
     displayingCapitals.forEach((capital, index) => {
-      let city = array[index];
+      const city = array[index];
       getImage(capital).then((response) => {
         if (response === 'error') {
-          city.style.backgroundImage = `url(https://images.unsplash.com/photo-1588001832198-c15cff59b078?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80)`;
+          city.style.backgroundImage = 'url(https://images.unsplash.com/photo-1588001832198-c15cff59b078?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80)';
         } else {
           city.style.backgroundImage = `url(${response.url})`;
         }

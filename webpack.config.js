@@ -1,4 +1,6 @@
 const path = require('path');
+const precss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   entry: './src/index.js',
@@ -20,9 +22,9 @@ module.exports = {
           {
             loader: 'postcss-loader', // Run post css actions
             options: {
-              plugins: function () {
+              plugins() {
                 // post css plugins, can be exported to postcss.config.js
-                return [require('precss'), require('autoprefixer')];
+                return [precss, autoprefixer];
               },
             },
           },
