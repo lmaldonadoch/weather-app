@@ -149,8 +149,7 @@ const Dom = (() => {
   function cityToDisplay(cityInfo, background) {
     const cityDiv = document.getElementById('main-city');
     cityDiv.style.backgroundImage = `url(${background})`;
-    console.log(background);
-    console.log(cityDiv.style);
+    cityDiv.classList.add('city');
     let infoDiv = document.createElement('div');
     infoDiv.classList.add(
       'd-flex',
@@ -172,11 +171,24 @@ const Dom = (() => {
     cityDiv.appendChild(infoDiv);
   }
 
+  function errorMessage() {
+    let cityDiv = document.getElementById('main-city');
+    cityDiv.innerHTML =
+      'I am sorry but I could not find the city you are looking for. Please check your spelling';
+    cityDiv.classList.add(
+      'error-message',
+      'bg-danger',
+      'text-light',
+      'text-center'
+    );
+  }
+
   return {
     addButtonFunctionality,
     randomCities,
     createWeatherInfo,
     cityToDisplay,
+    errorMessage,
   };
 })();
 

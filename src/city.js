@@ -1,3 +1,5 @@
+import Dom from './dom';
+
 const City = (() => {
   const weatherKey = '4cc6db5c47a2fa3608fe302dad1dd2dc';
 
@@ -24,18 +26,22 @@ const City = (() => {
   const displayingCapitals = [];
 
   async function getCity(city) {
-    const fahrenheit = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=imperial`,
-      { mode: 'cors' }
-    );
-    const celsius = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=metric`,
-      { mode: 'cors' }
-    );
-    const temperatureF = await fahrenheit.json();
-    const temperatureC = await celsius.json();
+    try {
+      const fahrenheit = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=imperial`,
+        { mode: 'cors' }
+      );
+      const celsius = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=metric`,
+        { mode: 'cors' }
+      );
+      const temperatureF = await fahrenheit.json();
+      const temperatureC = await celsius.json();
 
-    return [temperatureF, temperatureC];
+      return [temperatureF, temperatureC];
+    } catch (error) {
+      Dom.errorMessage(city);
+    }
   }
 
   function cityObject(index, city = null) {
@@ -61,18 +67,25 @@ const City = (() => {
   }
 
   async function getImage(city) {
-    const imageURLJSON = await fetch(
-      `https://source.unsplash.com/1600x900/?${city}-city`,
-      { mode: 'cors' }
-    );
-
-    return imageURLJSON;
+    try {
+      const imageURLJSON = await fetch(
+        `https://source.unsplash.com/1600x900/?${city}-city`,
+        { mode: 'cors' }
+      );
+      return imageURLJSON;
+    } catch (error) {
+      var rescueURL = {
+        url:
+          'https://images.unsplash.com/photo-1474524955719-b9f87c50ce47?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1052&q=80',
+      };
+      return rescueURL;
+    }
   }
 
   function displayRandomCity(array) {
     let i = 4;
     while (i > 0) {
-      let random = Math.floor(Math.random() * 15);
+      let random = Math.floor(Math.random() * 17);
       if (displayingCapitals.includes(capitals[random])) {
         continue;
       } else {
@@ -84,13 +97,18 @@ const City = (() => {
     displayingCapitals.forEach((capital, index) => {
       let city = array[index];
       getImage(capital).then((response) => {
-        city.style.backgroundImage = `url(${response.url})`;
+        if (response === 'error') {
+          city.style.backgroundImage = `url(https://images.unsplash.com/photo-1588001832198-c15cff59b078?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80)`;
+        } else {
+          city.style.backgroundImage = `url(${response.url})`;
+        }
       });
     });
   }
 
   function saveCity(city) {
     localStorage.setItem('city', JSON.stringify(city));
+    window.location.reload();
   }
 
   return {

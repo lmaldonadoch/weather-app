@@ -1,7 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 
-.city,
-.main-city {
+.city {
   min-height: 45vh;
   height: 45vh;
   width: 100%;
@@ -12,6 +11,25 @@
 
 .hidden {
   opacity: 0;
+}
+
+body {
+  background: url('../src/images/clouds.jpeg') no-repeat;
+  background-size: cover;
+}
+
+.page-title {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 3rem;
+  font-weight: 900;
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
+  // line-height: 65px;
+  // padding: 15px 0;
+}
+
+.error-message {
+  font-size: 2rem;
 }
 
 .weather-info-container {
