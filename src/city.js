@@ -38,7 +38,7 @@ const City = (() => {
 
       return [temperatureF, temperatureC];
     } catch (error) {
-      return 'I am sorry but I could not find the city you are looking for. Please check your spelling';
+      return error;
     }
   }
 
