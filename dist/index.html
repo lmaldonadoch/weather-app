@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="#" id="celsius-select">°C</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="fahrenheit-select">°F</a>
+        </li>
+        <li class="nav-item">
+          <form action="" class="form-inline" id="form">
+            <input
+              type="search"
+              class="form-control mr-sm-2 ml-2"
+              placeholder="Search for a City"
+              aria-label="Search"
+            />
+            <button
+              class="btn btn-outline-primary my-2 my-sm-0"
+              type="submit"
+              id="search-button"
+            >
+              Search
+            </button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+    <h1 class="page-title text-center my-3">The Weather Guru</h1>
+    <div
+      class="container-fluid row search no-gutters px-0 main-city d-flex justify-content-center city-5"
+      id="main-city"
+    ></div>
+
+    <div class="container-fluid row capitals no-gutters px-0">
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-0"
+      ></div>
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-1"
+      ></div>
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-2"
+      ></div>
+      <div
+        class="col-12 col-md-6 col-xl-3 city d-flex justify-content-center"
+        id="city-3"
+      ></div>
+    </div>
+  </body>
+  <script src="./bundle.js"></script>
+  <script src="https://kit.fontawesome.com/8e996abce9.js"></script>
+</html>

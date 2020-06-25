@@ -1,0 +1,42 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "A weather App using OpenWeather API and Giphy API coded with Vanilla JS",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server --watch --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmaldonadoch/weather-app.git"
+  },
+  "author": "Luis Angel Maldonado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lmaldonadoch/weather-app/issues"
+  },
+  "homepage": "https://github.com/lmaldonadoch/weather-app#readme",
+  "devDependencies": {
+    "css-loader": "^3.6.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "file-loader": "^6.0.0",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.26.9",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.8.0",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1",
+    "precss": "^4.0.0"
+  }
+}
