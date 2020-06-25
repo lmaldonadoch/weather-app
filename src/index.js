@@ -6,7 +6,8 @@ import Dom from './dom';
 const searchedCity = JSON.parse(localStorage.getItem('city'));
 if (searchedCity) {
   if (
-    searchedCity === {}
+    searchedCity === undefined
+    || searchedCity === {}
     || searchedCity[0].cod === '404' || searchedCity[0].cod === '400'
   ) {
     Dom.errorMessage();
