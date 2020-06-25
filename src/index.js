@@ -6,11 +6,11 @@ import Dom from './dom';
 const searchedCity = JSON.parse(localStorage.getItem('city'));
 if (searchedCity) {
   if (
-    searchedCity[0] === undefined
-    || searchedCity.length === 0
+    searchedCity.length === 0
     || searchedCity[0].cod === '404' || searchedCity[0].cod === '400'
   ) {
     Dom.errorMessage();
+    localStorage.clear();
   } else {
     const cityInfo = {};
     cityInfo.tempF = searchedCity[0].main;
