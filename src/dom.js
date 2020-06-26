@@ -24,6 +24,7 @@ const Dom = (() => {
   function addButtonFunctionality() {
     const searchButton = document.getElementById('search-button');
     const form = document.getElementById('form');
+    form.setAttribute('onsubmit', 'return false');
     searchButton.onclick = () => {
       City.getCity(form[0].value).then((response) => {
         City.saveCity(response);

@@ -7,7 +7,8 @@ const searchedCity = JSON.parse(localStorage.getItem('city'));
 if (searchedCity) {
   if (
     Object.keys(searchedCity).length === 0
-    || searchedCity[0].cod === '404' || searchedCity[0].cod === '400'
+    || searchedCity[0].cod === '404'
+    || searchedCity[0].cod === '400'
   ) {
     Dom.errorMessage();
     localStorage.clear();

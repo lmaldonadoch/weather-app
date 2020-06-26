@@ -15,7 +15,7 @@
 
 ## Live Version
 
-[Live Version](https://rawcdn.githack.com/lmaldonadoch/weather-app/a18d63d3e2b0fb84278465262d274742a07b0580/dist/index.html)
+[Live Version](https://rawcdn.githack.com/lmaldonadoch/weather-app/7356e62472a4fa13a78dd7a139ebd91f89e41849/dist/index.html)
 
 ## Built With
 
