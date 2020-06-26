@@ -4,12 +4,11 @@ import City from './city';
 import Dom from './dom';
 
 const searchedCity = JSON.parse(localStorage.getItem('city'));
-console.log(searchedCity);
 if (searchedCity) {
   if (
-    Object.keys(searchedCity).length === 0 ||
-    searchedCity[0].cod === '404' ||
-    searchedCity[0].cod === '400'
+    Object.keys(searchedCity).length === 0
+    || searchedCity[0].cod === '404'
+    || searchedCity[0].cod === '400'
   ) {
     Dom.errorMessage();
     localStorage.clear();
