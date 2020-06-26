@@ -27,11 +27,11 @@ const City = (() => {
     try {
       const fahrenheit = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=imperial`,
-        { mode: 'cors' },
+        { mode: 'cors' }
       );
       const celsius = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherKey}&units=metric`,
-        { mode: 'cors' },
+        { mode: 'cors' }
       );
       const temperatureF = await fahrenheit.json();
       const temperatureC = await celsius.json();
@@ -68,7 +68,7 @@ const City = (() => {
     try {
       const imageURLJSON = await fetch(
         `https://source.unsplash.com/1600x900/?${city}-city`,
-        { mode: 'cors' },
+        { mode: 'cors' }
       );
       return imageURLJSON;
     } catch (error) {
@@ -94,7 +94,8 @@ const City = (() => {
       const city = array[index];
       getImage(capital).then((response) => {
         if (response === 'error') {
-          city.style.backgroundImage = 'url(https://images.unsplash.com/photo-1588001832198-c15cff59b078?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80)';
+          city.style.backgroundImage =
+            'url(https://images.unsplash.com/photo-1588001832198-c15cff59b078?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80)';
         } else {
           city.style.backgroundImage = `url(${response.url})`;
         }

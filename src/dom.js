@@ -17,13 +17,14 @@ const Dom = (() => {
         } else {
           container.classList.add('hidden');
         }
-      },
+      }
     );
   }
 
   function addButtonFunctionality() {
     const searchButton = document.getElementById('search-button');
     const form = document.getElementById('form');
+    form.setAttribute('onsubmit', 'return false');
     searchButton.onclick = () => {
       City.getCity(form[0].value).then((response) => {
         City.saveCity(response);
@@ -57,7 +58,7 @@ const Dom = (() => {
       'flex-column',
       'hidden',
       'temp-container',
-      'fahrenheit',
+      'fahrenheit'
     );
     fahrenheitContainer.setAttribute('id', 'fahrenheit');
 
@@ -70,7 +71,7 @@ const Dom = (() => {
       'd-flex',
       'flex-column',
       'justify-content-between',
-      'minmax-temp',
+      'minmax-temp'
     );
 
     const minTempF = document.createElement('div');
@@ -95,7 +96,7 @@ const Dom = (() => {
       'd-flex',
       'flex-column',
       'temp-container',
-      'celsius',
+      'celsius'
     );
     celsiusContainer.setAttribute('id', 'celsius');
 
@@ -108,7 +109,7 @@ const Dom = (() => {
       'd-flex',
       'flex-column',
       'justify-content-between',
-      'minmax-temp',
+      'minmax-temp'
     );
 
     const minTempC = document.createElement('div');
@@ -133,7 +134,7 @@ const Dom = (() => {
       'info',
       'temp-wrapper',
       'position-relative',
-      'weather-info-container',
+      'weather-info-container'
     );
 
     const cityNameDiv = document.createElement('div');
@@ -158,7 +159,7 @@ const Dom = (() => {
       'info',
       'temp-wrapper',
       'position-relative',
-      'weather-info-container',
+      'weather-info-container'
     );
 
     const cityNameDiv = document.createElement('div');
@@ -174,12 +175,13 @@ const Dom = (() => {
 
   function errorMessage() {
     const cityDiv = document.getElementById('main-city');
-    cityDiv.innerHTML = 'I am sorry but I could not find the city you are looking for. Please check your spelling';
+    cityDiv.innerHTML =
+      'I am sorry but I could not find the city you are looking for. Please check your spelling';
     cityDiv.classList.add(
       'error-message',
       'bg-danger',
       'text-light',
-      'text-center',
+      'text-center'
     );
   }
 
